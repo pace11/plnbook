@@ -42,6 +42,8 @@ if ($data['id_role'] == 1 || $data['id_role'] == 2 ){
     $status = "<a class='btn btn-default btn-xs'><i class='fa fa-code-fork'></i> $data[status]</a>";
 }
 
+$pesan = mysqli_query($koneksi, "SELECT * FROM pesan WHERE jawaban IS NULL");
+$hitpesan = mysqli_num_rows($pesan);
 
 ?>
 <ul class="nav navbar-nav">

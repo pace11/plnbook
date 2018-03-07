@@ -22,11 +22,9 @@
         
       </div>
     </div>
-  </section>
 
-  <section class="content">
   <div class="row">
-
+    
   <div class="col-xs-12">
     <div class="box box-success">
       <div class="box-header with-border">
@@ -225,7 +223,6 @@
   
 <?php
   $bln = mysqli_query($koneksi, "SELECT * FROM bulan");
-
   $nil = mysqli_query($koneksi, "SELECT performance FROM report_vendor
                                  JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
                                  WHERE report_vendor.id_vendor='$id'");
