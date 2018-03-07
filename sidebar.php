@@ -42,6 +42,9 @@
       <li class="<?php if ($_GET['tampil'] == 'pesan'){echo "active";} ?>">
         <a href="?tampil=pesan">
           <i class="fa fa-commenting"></i> Pesan
+            <span class="pull-right-container">
+              <small class="label pull-right bg-red"><?php echo $hitpesan; ?></small>
+            </span>
         </a>
       </li>
     </ul>
