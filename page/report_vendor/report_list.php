@@ -1,7 +1,6 @@
 <section class="content">  
     <div class="row">
-      <div class="col-xs-12">
-          
+      <div class="col-md-6 col-sm-6 col-xs-12">   
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title"><b>Chart Report</b> | <i class="fa fa-code-fork"></i> <?php echo $nama; ?></h3>
@@ -13,13 +12,95 @@
             </div>
           </div>
           <div class="box-body">
+            <form action="" method="post">  
+              <div class="col-md-4">
+                <select class="form-control" name="kontrak" id="kontrak">
+                  <option value="">-- pilih satu --</option>
+                  <?php
+                  $sql = mysqli_query($koneksi, "SELECT * FROM kontrak ORDER BY id_kontrak");
+                  while ($row = mysqli_fetch_array($sql)){
+                    echo "<option value=$row[id_kontrak]>$row[type]</option> \n";
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select class="form-control" name="varian" id="varian">
+                  <option>-- pilih satu --</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                </i><input type="submit" class="btn btn-primary btn-sm btn-submit" name="cek" value="cek">
+              </div>
+            </form>
+            <?php 
+            if (isset($_POST['cek'])){
+              
+              $kontrak = $_POST['kontrak'];
+              $varian = $_POST['varian'];
+
+              $bln = mysqli_query($koneksi, "SELECT * FROM bulan");
+              $nil = mysqli_query($koneksi, "SELECT * FROM report_vendor
+                                            JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
+                                            WHERE report_vendor.id_vendor='$id' AND report_vendor.id_kontrak='$kontrak'
+                                            AND report_vendor.id_varkontrak='$varian'");
+            ?>
             <div class="chart">
               <canvas id="areaChart" style="height:250px"></canvas>
             </div>
+            <?php } ?>
           </div>
           <!-- /.box-body -->
         </div>
-        
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="box box-danger">
+          <div class="box-header with-border">
+            <h3 class="box-title"><b>Type Kontrak</b> | <i class="fa fa-code-fork"></i> <?php echo $nama; ?></h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+            <table class="table table-bordered">
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Jenis</th>
+                <th>Nama</th>
+                <th>Progress</th>
+                <th>Label</th>
+              </tr>
+              <?php
+                $no=1;
+                $tipe = mysqli_query($koneksi,"SELECT type, type_varian, count(type) AS jumlah FROM report_vendor
+                                              JOIN kontrak ON report_vendor.id_kontrak=kontrak.id_kontrak
+                                              JOIN varian_kontrak ON report_vendor.id_varkontrak=varian_kontrak.id_varkontrak
+                                              WHERE report_vendor.id_vendor='$id'
+                                              GROUP BY type")
+                or die(mysqli_error($koneksi));
+                while($dtipe = mysqli_fetch_array($tipe)) {
+              ?>
+              <tr>
+                <td><?php echo $no; ?></td>
+                <td><?php echo $dtipe['type']; ?></td>
+                <td><?php echo $dtipe['type_varian']; ?></td>
+                <td>
+                  <?php $a = $dtipe['jumlah']; $b = $a/12; $c = round($b*100,2);?>
+                  <div class="progress progress-xs progress-striped active">
+                    <div class="progress-bar progress-bar-primary" style="width: <?= $c ?>%"></div>
+                  </div>
+                </td>
+                <td>
+                  <span class="badge bg-light-blue"><?= $c."%" ?></span>
+                  <span class="badge bg-red"><?= $dtipe['jumlah']."/12 Bulan" ?></span>
+                </td>
+              </tr>
+              <?php } ?>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -28,7 +109,7 @@
   <div class="col-xs-12">
     <div class="box box-success">
       <div class="box-header with-border">
-        <h3 class="box-title"><b>Report</b> | Data</h3>
+        <h3 class="box-title"><b>Report Data</b> | <i class="fa fa-code-fork"></i> <?php echo $nama; ?></h3>
         <div class="pull-right">
           <a class="btn btn-success" href="#" data-target="#modal_tambah" data-toggle="modal">
             <span class="fa fa-plus-circle"></span> Tambah Data
@@ -64,7 +145,8 @@
                                                  JOIN kontrak ON report_vendor.id_kontrak=kontrak.id_kontrak
                                                  JOIN varian_kontrak ON report_vendor.id_varkontrak=varian_kontrak.id_varkontrak
                                                  JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
-                                                 WHERE report_vendor.id_vendor='$id'")
+                                                 WHERE report_vendor.id_vendor='$id'
+                                                 ORDER BY report_vendor.id_kontrak ASC")
                   or die(mysqli_error($koneksi));
 
                   while($data = mysqli_fetch_array($sql)){
@@ -140,7 +222,7 @@
                   <div class="form-group">
                     <label class="label-control col-md-3">JENIS KONTRAK</label>
                     <div class="col-md-4">
-                    <select class="form-control" name="kontrak" id="kontrak">
+                    <select class="form-control" name="kontrak" id="kontrak2">
                       <option value="">-- jenis kontrak --</option>
                       <?php
                       $sql = mysqli_query($koneksi, "SELECT * FROM kontrak ORDER BY id_kontrak");
@@ -155,7 +237,7 @@
                   <div class="form-group">
                     <label class="label-control col-md-3">NAMA KONTRAK</label>
                     <div class="col-md-4">
-                    <select class="form-control" name="varian" id="varian">
+                    <select class="form-control" name="varian" id="varian2">
                       <option>-- pilih salah satu --</option>
                     </select>
                     </div>
@@ -168,14 +250,14 @@
                   <div class="form-group">
                     <label class="label-control col-md-3">LINK REPORT</label>
                     <div class="col-md-8">
-                      <textarea class="form-control" name="link" rows="3" required></textarea>
+                      <textarea class="form-control" name="link" rows="3" placeholder="isikan link disini ..." required></textarea>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label class="label-control col-md-3">PERFORMANCE</label>
                     <div class="col-md-4">
-                      <input class="form-control" type="text" name="perform" required>
+                      <input class="form-control" type="text" placeholder="ex : 98.99" name="perform" required>
                     </div>
                   </div>
 
@@ -220,13 +302,6 @@
     <!-- /.box -->
   </section>
 
-  
-<?php
-  $bln = mysqli_query($koneksi, "SELECT * FROM bulan");
-  $nil = mysqli_query($koneksi, "SELECT performance FROM report_vendor
-                                 JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
-                                 WHERE report_vendor.id_vendor='$id'");
-?>
   <script>
   $(function () {
     /* ChartJS
@@ -244,7 +319,7 @@
     var areaChart       = new Chart(areaChartCanvas)
 
     var areaChartData = {
-      labels  : [<?php while($data=mysqli_fetch_array($bln)){echo "'".$data['nama_bulan']."',";}?>],
+      labels  : [<?php while($data=mysqli_fetch_array($bln)){echo "'".substr($data['nama_bulan'],0,3)."',";}?>],
       datasets: [
         {
           label               : 'Digital Goods',

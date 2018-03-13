@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2018 at 06:03 AM
+-- Generation Time: Mar 13, 2018 at 08:05 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -148,10 +148,10 @@ CREATE TABLE `pesan` (
 INSERT INTO `pesan` (`id_pesan`, `subjek`, `isi`, `jawaban`, `nip`, `id_vendor`, `created_at`) VALUES
 (1, 'Gagal Upload', 'kenapa pada saat ngupload materi ada error ya, makasih', 'kayaknya mas salah ngupload gambarnya deh.. coba nanti dicek aja lagi ya.. ', 'GARUDA0001', NULL, '2018-02-28'),
 (2, 'Chart error', 'pak. kenapa pas upload chart, malah error dan nggak muncul. mohon bantuannya.. ', 'oke.. siap.. segera dicek ya mas... (y)', NULL, 'VENDOR0001', '2018-02-28'),
-(3, 'Profil tampil error', 'mas kenapa ya ketika saya mau edit profil, munculnya error nggak jelas. makasih mas. mohon pencerahannya..', NULL, NULL, 'VENDOR0003', '2018-03-01'),
-(4, 'Email', 'Mas, saya belom dapat email masuk.. kenapa ya mas ??', NULL, NULL, 'VENDOR0003', '2018-03-02'),
+(4, 'Email', 'Mas, saya belom dapat email masuk.. kenapa ya mas ??', 'sudah masuk mas.. coba dicek mas.. ', NULL, 'VENDOR0003', '2018-03-02'),
 (7, 'Gagal Download', 'mas, kenapa masih gagal download ya ??', 'coba dicek lagi mas.. sdh bisa kok. makasih..', 'GARUDA0001', NULL, '2018-03-02'),
-(9, 'Error Export', 'Mas, kenapa ketika saya export ke PDF, malah error ya muncul query error..', 'coba dicek mas.. sekarang sdh masuk itu.. makasih', 'GARUDA0002', NULL, '2018-03-03');
+(9, 'Error Export', 'Mas, kenapa ketika saya export ke PDF, malah error ya muncul query error..', 'coba dicek mas.. sekarang sdh masuk itu.. makasih', 'GARUDA0002', NULL, '2018-03-03'),
+(10, 'Grafik', 'mas.. grafik saya nggak jalan.. ada error tah ??', NULL, NULL, 'VENDOR0001', '2018-03-09');
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,10 @@ INSERT INTO `report_vendor` (`id_report`, `id_vendor`, `id_kontrak`, `id_varkont
 (9, 'VENDOR0004', 3, 2, '2018', 3, 'echo \"<meta http-equiv=\'refresh\' content=\'1;url=?tampil=karyawan\'>\"; ', '89.77'),
 (10, 'VENDOR0001', 2, 1, '2018', 4, 'http://localhost/rev_report/index.php?tampil=report_vendor', '40.78'),
 (11, 'VENDOR0001', 2, 1, '2018', 5, 'http://localhost/rev_report/index.php?tampil=report_vendor', '81.76'),
-(12, 'VENDOR0003', 1, 4, '2018', 3, 'http://localhost/rev_report/index.php?tampil=report_vendor', '98.96');
+(12, 'VENDOR0003', 1, 4, '2018', 3, 'http://localhost/rev_report/index.php?tampil=report_vendor', '98.96'),
+(13, 'VENDOR0002', 2, 3, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '77.91'),
+(15, 'VENDOR0002', 2, 3, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '67.82'),
+(16, 'VENDOR0001', 1, 4, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '76.90');
 
 -- --------------------------------------------------------
 
@@ -294,12 +297,12 @@ ALTER TABLE `bulan`
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id_pesan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pesan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `report_vendor`
 --
 ALTER TABLE `report_vendor`
-  MODIFY `id_report` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_report` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `varian_kontrak`
 --

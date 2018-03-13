@@ -42,7 +42,6 @@
   <script src="src/bower_components/jquery/src/ajax/script.js"></script>
 
     <script>
-
       $(document).ready(function(){
         $("#kontrak").change(function(){
           var kontrak  = $("#kontrak").val();
@@ -55,7 +54,21 @@
             })
         })
       })
+
+      $(document).ready(function(){
+        $("#kontrak2").change(function(){
+          var kontrak  = $("#kontrak2").val();
+            $.ajax({
+              url:"page/report_vendor/proses_report.php",
+              data:"kontrak2=" + kontrak,
+              success:function(data){
+                $("#varian2").html(data);
+              }
+            })
+        })
+      })
     </script>
+
 
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -68,7 +81,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="?tampil=beranda" class="logo">
+    <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><i class="fa fa-plane"></i></span>
       <!-- logo for regular state and mobile devices -->

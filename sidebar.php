@@ -2,7 +2,7 @@
 
   <li class="header">MAIN SIDEBAR</li>
   
-  <?php if ($data['id_role'] == 1 || $data['id_role'] == 2 || $data['id_role'] == 3 ) { ?>
+  <?php if ($data['id_role'] == 2 || $data['id_role'] == 3 ) { ?>
   
   <li class="<?php if ($_GET['tampil'] == 'beranda'){ echo "active"; }?>">
     <a href="?tampil=beranda">
@@ -13,6 +13,12 @@
   <?php } ?>
 
   <?php if ($data['id_role'] == 1) { ?>
+
+  <li class="<?php if ($_GET['tampil'] == 'beranda2'){ echo "active"; }?>">
+    <a href="?tampil=beranda2">
+      <i class="fa fa-dashboard"></i> <span>Beranda</span>
+    </a>
+  </li>
 
   <li class="treeview <?php if ($_GET['tampil'] == 'karyawan' || $_GET['tampil'] == 'vendor'
                                 || $_GET['tampil'] == 'karyawan_edit' || $_GET['tampil'] == 'vendor_edit'

@@ -2,7 +2,12 @@
 
 include("../../lib/koneksi.php");
 
-$kontrak = $_GET['kontrak'];
+if (isset($_GET['kontrak']) != "") {
+  $kontrak = $_GET['kontrak'];
+} else {
+  $kontrak = $_GET['kontrak2'];
+}
+
 $sql_kontrak = mysqli_query($koneksi, "SELECT * FROM varian_kontrak WHERE id_kontrak='$kontrak'");
 
 echo "<option>-- pilih salah satu --</option>";

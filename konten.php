@@ -3,8 +3,9 @@
   if (isset($_GET['tampil'])) $tampil=$_GET['tampil'];
   else $tampil="beranda";
 
-  if ($tampil == "beranda") include "beranda.php";
+  if ($tampil == "beranda") include("beranda.php");
   else if ($tampil == "logout") include "logout.php";
+  else if ($tampil == "beranda2") include "beranda2.php";
 
   // ------------------------ karyawan ------------------------
   elseif ($tampil == "karyawan") include("page/karyawan/karyawan_list.php");
