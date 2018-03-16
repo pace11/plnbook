@@ -45,6 +45,33 @@ if ($data['id_role'] == 1 || $data['id_role'] == 2 ){
 $pesan = mysqli_query($koneksi, "SELECT * FROM pesan WHERE jawaban IS NULL");
 $hitpesan = mysqli_num_rows($pesan);
 
+function isivendor($id){
+  include 'lib/koneksi.php';
+  $no=1;
+  $tipe = mysqli_query($koneksi,"SELECT type, type_varian, count(type) AS jumlah FROM report_vendor
+                                JOIN kontrak ON report_vendor.id_kontrak=kontrak.id_kontrak
+                                JOIN varian_kontrak ON report_vendor.id_varkontrak=varian_kontrak.id_varkontrak
+                                WHERE report_vendor.id_vendor='$id'
+                                GROUP BY type")
+  or die(mysqli_error($koneksi));
+  while($dtipe = mysqli_fetch_array($tipe)) {
+    $a = $dtipe['jumlah']; $b = $a/12; $c = round($b*100,2);
+  echo "<tr>";
+  echo "<td>$no</td>";
+  echo "<td>$dtipe[type]</td>";
+  echo "<td>$dtipe[type_varian]</td>";
+  echo "<td>";
+  echo "<div class='progress progress-xs progress-striped active'>";
+  echo "<div class='progress-bar progress-bar-primary' style='width:$c%'></div>";
+  echo "</div>";
+  echo "</td>";
+  echo "<td><span class='badge bg-light-blue'>".$c."%"."</span>"." ";
+  echo "<span class='badge bg-red'>$dtipe[jumlah]"."/12 Bulan"."</span>";
+  echo "</td>";
+  echo "</tr>";
+  $no++;
+}}
+
 ?>
 <ul class="nav navbar-nav">
 

@@ -6,32 +6,19 @@ $users = mysqli_num_rows($sql1);
 $sql2 = mysqli_query($koneksi, "SELECT * FROM master_vendor");
 $vendor = mysqli_num_rows($sql2);
 
-function isivendor($id){
-    include 'lib/koneksi.php';
-    $no=1;
-    $tipe = mysqli_query($koneksi,"SELECT type, type_varian, count(type) AS jumlah FROM report_vendor
-                                  JOIN kontrak ON report_vendor.id_kontrak=kontrak.id_kontrak
-                                  JOIN varian_kontrak ON report_vendor.id_varkontrak=varian_kontrak.id_varkontrak
-                                  WHERE report_vendor.id_vendor='$id'
-                                  GROUP BY type")
-    or die(mysqli_error($koneksi));
-    while($dtipe = mysqli_fetch_array($tipe)) {
-      $a = $dtipe['jumlah']; $b = $a/12; $c = round($b*100,2);
+$sql3 = mysqli_query($koneksi, "SELECT * FROM report_vendor");
+$kont = mysqli_num_rows($sql3);
 
-    echo "<tr>";
-    echo "<td>$no</td>";
-    echo "<td>$dtipe[type]</td>";
-    echo "<td>$dtipe[type_varian]</td>";
-    echo "<td>";
-    echo "<div class='progress progress-xs progress-striped active'>";
-    echo "<div class='progress-bar progress-bar-primary' style='width:$c%'></div>";
-    echo "</div>";
-    echo "</td>";
-    echo "<td><span class='badge bg-light-blue'>".$c."%"."</span>"." ";
-    echo "<span class='badge bg-red'>$dtipe[jumlah]"."/12 Bulan"."</span>";
-    echo "</td>";
-    echo "</tr>";
-  }}
+function kontrak(){
+  include 'lib/koneksi.php';
+  $kontrak = mysqli_query($koneksi, "SELECT type, count(type) AS jumlah FROM report_vendor
+                                     JOIN kontrak ON report_vendor.id_kontrak=kontrak.id_kontrak
+                                     GROUP BY type")
+                                     or die (mysqli_error($koneksi));
+  while($dkon = mysqli_fetch_array($kontrak)){
+    echo "$dkon[type]"." <a class='btn btn-danger btn-xs'>$dkon[jumlah]</a> ";
+    }
+  }
 ?>
 <section class="content-header">
   <h1>
@@ -71,6 +58,20 @@ function isivendor($id){
               <span class="info-box-number">
                 <?= $vendor; ?>
               </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="clearfix visible-sm-block"></div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-red"><i class="fa fa-code-fork"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Kontrak</span>
+              <span class="info-box-number">
+                <?= $kont ?>  
+              </span>
+              <p><?php kontrak() ?></p>
             </div>
           </div>
         </div>
@@ -157,9 +158,10 @@ function isivendor($id){
       </div>
 
       <div class="col-md-5 col-sm-6 col-xs-12">
-        <div class="box box-primary">
+        <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title"><b>Kontrak</b> Vendor</h3>
+              <a href="?tampil=report_vendorad" title="lihat data" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -169,7 +171,6 @@ function isivendor($id){
             </div>
             <div class="box-body">
               <div class="box-group" id="accordion">
-                
                 <?php 
                 $no=1;
                 $vend = mysqli_query($koneksi, "SELECT * FROM master_vendor");

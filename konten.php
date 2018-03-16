@@ -25,6 +25,8 @@
   elseif ($tampil == "report_vendor") include("page/report_vendor/report_list.php");
   elseif ($tampil == "report_tambahpro") include("page/report_vendor/report_tambahpro.php");
 
+  // ------------------------ Report Vendor All ------------------------
+  elseif ($tampil == "report_vendorad") include("page/report_vendorad/report_listad.php");
   // ------------------------ Pesan ------------------------
   elseif ($tampil == "pesan") include("page/pesan/pesan_list.php");
 
