@@ -5,12 +5,11 @@
 
 <?php
   session_destroy();
-
   echo"<strong>Anda Telah Keluar </strong>";
   echo"<meta http-equiv='refresh' content='1;
       url=login_admin.php'>";
 ?>
-    <span class="glyphicon glyphicon-ok"></span>
+      <span class="glyphicon glyphicon-ok"></span>
       </div>
     </div>
   </div>

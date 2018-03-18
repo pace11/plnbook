@@ -90,12 +90,12 @@ function isivendor($id){
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="?tampil=profil" class="btn btn-success btn-flat">
+                  <a href="?tampil=profil" class="btn btn-default btn-flat">
                     <span class="fa fa-cog"></span> 
                     Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="?tampil=logout" class="btn btn-danger btn-flat">
+                  <a href="?tampil=logout" class="btn btn-default btn-flat">
                     <span class="fa fa-sign-out"></span>
                     Sign out</a>
                 </div>

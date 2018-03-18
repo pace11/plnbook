@@ -14,8 +14,8 @@
 
   <?php if ($data['id_role'] == 1) { ?>
 
-  <li class="<?php if ($_GET['tampil'] == 'beranda2'){ echo "active"; }?>">
-    <a href="?tampil=beranda2">
+  <li class="<?php if ($_GET['tampil'] == 'berandaa'){ echo "active"; }?>">
+    <a href="?tampil=berandaa">
       <i class="fa fa-dashboard"></i> <span>Beranda</span>
     </a>
   </li>
