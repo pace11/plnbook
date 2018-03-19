@@ -336,6 +336,7 @@
           data                : [
             <?php while($dataa=mysqli_fetch_array($nil)){echo $dataa['performance'].",";} ?>]
         },
+        //chart line kedua
         {
           label               : 'Electronics',
           fillColor           : '#f9ada4',
