@@ -44,6 +44,10 @@
                                             JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
                                             WHERE report_vendor.id_vendor='$id' AND report_vendor.id_kontrak='$kontrak'
                                             AND report_vendor.id_varkontrak='$varian'");
+               $nila = mysqli_query($koneksi, "SELECT sla FROM report_vendor
+                                 JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
+                                 WHERE report_vendor.id_vendor='$id'AND report_vendor.id_kontrak='$kontrak'
+                                            AND report_vendor.id_varkontrak='$varian'");
             ?>
             <div class="chart">
               <canvas id="areaChart" style="height:250px"></canvas>
@@ -331,6 +335,16 @@
           pointHighlightStroke: 'rgba(60,141,188,1)',
           data                : [
             <?php while($dataa=mysqli_fetch_array($nil)){echo $dataa['performance'].",";} ?>]
+        },
+        {
+          label               : 'Electronics',
+          fillColor           : '#f9ada4',
+          strokeColor         : 'rgba(223,22,22)',
+          pointColor          : '#df1616',
+          pointStrokeColor    : 'rgba(223,22,22)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(223,22,22)' ,
+          data                : [ <?php while($dataaa=mysqli_fetch_array($nila)){echo $dataaa['sla'].",";} ?>]
         }
       ]
     }
