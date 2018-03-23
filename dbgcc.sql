@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2018 at 08:05 PM
+-- Generation Time: Mar 23, 2018 at 10:07 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -74,7 +74,7 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`nip`, `nama_karyawan`, `unit`, `email`, `contact`, `username`, `passwd`, `id_role`, `img`) VALUES
-('GARUDA0001', 'M Iriansyah Putra Pratama', 'JKTMX-1', 'pace@gmail.com', '6282248080870', 'pace', 'pace', '1', '3.jpg'),
+('GARUDA0001', 'M Iriansyah Putra Pratama', 'JKTMX-1', 'pace@gmail.com', '6282248080870', 'pace', 'pace', '1', 'pace.jpg'),
 ('GARUDA0002', 'Thufail Erlangga', 'JKTMX-2', 'erlangga@gmail.com', '6281344303816', 'angga', 'angga', '2', '1.jpg');
 
 -- --------------------------------------------------------
@@ -177,17 +177,9 @@ CREATE TABLE `report_vendor` (
 INSERT INTO `report_vendor` (`id_report`, `id_vendor`, `id_kontrak`, `id_varkontrak`, `tahun`, `id_bulan`, `link_report`, `performance`) VALUES
 (2, 'VENDOR0001', 2, 1, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '98.90'),
 (3, 'VENDOR0001', 2, 1, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '90.00'),
-(4, 'VENDOR0003', 1, 4, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '92.00'),
-(5, 'VENDOR0003', 1, 4, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '75.00'),
 (6, 'VENDOR0001', 2, 1, '2018', 3, 'http://localhost/rev_report/index.php?tampil=report_vendor', '87.00'),
-(7, 'VENDOR0004', 3, 2, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '96.95'),
-(8, 'VENDOR0004', 3, 2, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '76.86'),
-(9, 'VENDOR0004', 3, 2, '2018', 3, 'echo \"<meta http-equiv=\'refresh\' content=\'1;url=?tampil=karyawan\'>\"; ', '89.77'),
 (10, 'VENDOR0001', 2, 1, '2018', 4, 'http://localhost/rev_report/index.php?tampil=report_vendor', '40.78'),
 (11, 'VENDOR0001', 2, 1, '2018', 5, 'http://localhost/rev_report/index.php?tampil=report_vendor', '81.76'),
-(12, 'VENDOR0003', 1, 4, '2018', 3, 'http://localhost/rev_report/index.php?tampil=report_vendor', '98.96'),
-(13, 'VENDOR0002', 2, 3, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '77.91'),
-(15, 'VENDOR0002', 2, 3, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '67.82'),
 (16, 'VENDOR0001', 1, 4, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '76.90');
 
 -- --------------------------------------------------------
@@ -219,18 +211,17 @@ INSERT INTO `role_login` (`id_role`, `status`) VALUES
 CREATE TABLE `varian_kontrak` (
   `id_varkontrak` int(5) NOT NULL,
   `type_varian` varchar(30) NOT NULL,
-  `id_kontrak` int(5) NOT NULL
+  `id_kontrak` int(5) NOT NULL,
+  `id_vendor` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `varian_kontrak`
 --
 
-INSERT INTO `varian_kontrak` (`id_varkontrak`, `type_varian`, `id_kontrak`) VALUES
-(1, 'Wifi Gedung SO', 2),
-(2, 'Server GCC', 3),
-(3, 'Wifi Hanggar', 2),
-(4, 'HC Online', 1);
+INSERT INTO `varian_kontrak` (`id_varkontrak`, `type_varian`, `id_kontrak`, `id_vendor`) VALUES
+(1, 'Wifi Gedung SO', 2, 'VENDOR0001'),
+(4, 'HC Online', 1, 'VENDOR0001');
 
 --
 -- Indexes for dumped tables
