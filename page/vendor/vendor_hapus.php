@@ -4,7 +4,7 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-          <h3 class="box-title"><b>Vendor</b> | Hapus</h3>
+          <h3 class="box-title"><b>Karyawan</b> | Hapus</h3>
       </div>
 
         <div class="box-body">
@@ -12,19 +12,19 @@
 
         <?php
 
-        $data = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM karyawan WHERE nip='$_GET[id]'"));
+        $data = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM master_vendor WHERE id_vendor='$_GET[id]'"));
 
           if ($data['img'] != "")
-              unlink("data/img/karyawan/$data[img]");
+              unlink("data/img/vendor/$data[img]");
 
               // querry untuk melakukan delete
-              $input  = mysqli_query($koneksi, "DELETE FROM karyawan WHERE nip='$_GET[id]'")
+              $input  = mysqli_query($koneksi, "DELETE FROM master_vendor WHERE id_vendor='$_GET[id]'")
                                       or die (mysqli_error($koneksi));
 
             if ($input){
-              echo"Karyawan berhasil dihapus";
+              echo"Vendor berhasil dihapus";
               echo"<meta http-equiv='refresh' content='1;
-              url=?tampil=karyawan'>";
+              url=?tampil=vendor'>";
             }
         ?>
 

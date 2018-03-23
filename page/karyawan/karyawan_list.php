@@ -214,3 +214,5 @@
   <!-- /.box -->
 
 </section>
+
+<script src="src/bower_components/bootstrap/dist/js/konfirmasi.js"></script>

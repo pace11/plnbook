@@ -173,7 +173,9 @@ function kontrak(){
               <div class="box-group" id="accordion">
                 <?php 
                 $no=1;
-                $vend = mysqli_query($koneksi, "SELECT * FROM master_vendor");
+                $vend = mysqli_query($koneksi, "SELECT * FROM report_vendor
+                                                JOIN master_vendor ON report_vendor.id_vendor=master_vendor.id_vendor
+                                                GROUP BY report_vendor.id_vendor ASC");
                 while ($dvend = mysqli_fetch_array($vend)) {
                 ?>
                   <div class="panel box box-primary">
@@ -186,19 +188,21 @@ function kontrak(){
                     </div>
                     <div id="collapse<?= $no ?>" class="panel-collapse collapse <?php if ($no == 1){echo "in"; } ?>">
                       <div class="box-body">
-                        <table class="table table-bordered">
-                          <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Jenis</th>
-                            <th>Nama</th>
-                            <th>Progress</th>
-                            <th>Label</th>
-                            <?php 
-                            $id = $dvend['id_vendor']; 
-                            isivendor($id);
-                            ?>
-                          </tr>
-                        </table>
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <tr>
+                              <th style="width: 10px">#</th>
+                              <th>Jenis</th>
+                              <th>Nama</th>
+                              <th>Progress</th>
+                              <th>Label</th>
+                              <?php 
+                              $id = $dvend['id_vendor']; 
+                              isivendor($id);
+                              ?>
+                            </tr>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>

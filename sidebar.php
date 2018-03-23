@@ -24,7 +24,7 @@
                                 || $_GET['tampil'] == 'karyawan_edit' || $_GET['tampil'] == 'vendor_edit'
                                 || $_GET['tampil'] == 'karyawan_editpro' || $_GET['tampil'] == 'vendor_editpro'
                                 || $_GET['tampil'] == 'karyawan_hapus' || $_GET['tampil'] == 'vendor_hapus'
-                                || $_GET['tampil'] == 'pesan' || $_GET['tampil'] == 'report_vendorad')
+                                || $_GET['tampil'] == 'pesan' || $_GET['tampil'] == 'kontrak_vendor')
                                 { echo "active"; }?>">
     <a href="#">
       <i class="fa fa-cog"></i> <span>Manajemen</span>
@@ -53,9 +53,9 @@
             </span>
         </a>
       </li>
-      <li class="<?php if ($_GET['tampil'] == 'report_vendorad'){ echo "active"; }?>">
-        <a href="?tampil=report_vendorad">
-          <i class="fa fa-bar-chart"></i> <span>Report Vendor</span>
+      <li class="<?php if ($_GET['tampil'] == 'kontrak_vendor'){ echo "active"; }?>">
+        <a href="?tampil=kontrak_vendor">
+          <i class="fa fa-suitcase"></i> <span>Kontrak</span>
         </a>
       </li>
     </ul>
