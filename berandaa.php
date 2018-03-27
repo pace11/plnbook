@@ -142,6 +142,11 @@ function kontrak(){
                                              JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
                                              WHERE report_vendor.id_vendor='$id' AND report_vendor.id_kontrak='$kon'
                                              AND report_vendor.id_varkontrak='$var'");
+              $nila = mysqli_query($koneksi, "SELECT sla FROM report_vendor
+                                              JOIN bulan ON report_vendor.id_bulan=bulan.id_bulan
+                                              WHERE report_vendor.id_vendor='$id'AND report_vendor.id_kontrak='$kon'
+                                              AND report_vendor.id_varkontrak='$var'");
+
             ?>
             <br><br>
             <div class="col-md-12"> 
@@ -245,6 +250,16 @@ function kontrak(){
           pointHighlightStroke: 'rgba(60,141,188,1)',
           data                : [
             <?php while($dataa=mysqli_fetch_array($nill)){echo $dataa['performance'].",";} ?>]
+        },
+         {
+          label               : 'Electronics',
+          fillColor           : '#f9ada4',
+          strokeColor         : 'rgba(223,22,22)',
+          pointColor          : '#df1616',
+          pointStrokeColor    : 'rgba(223,22,22)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(223,22,22)' ,
+          data                : [ <?php while($dataaa=mysqli_fetch_array($nila)){echo $dataaa['sla'].",";} ?>]
         }
       ]
     }

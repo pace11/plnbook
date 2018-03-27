@@ -21,6 +21,7 @@
                         tahun             = '$_POST[tahun]',
                         id_bulan          = '$_POST[bulan]',
                         link_report       = '$link',
+                        sla               = '$_POST[sla]',
                         performance       = '$_POST[perform]'
                         ")  or die (mysqli_error($koneksi));
               

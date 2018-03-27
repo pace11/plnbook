@@ -132,6 +132,7 @@
             <th rowspan="2">NAMA KONTRAK</th>
             <th colspan="2">PERIODE</th>
             <th rowspan="2">LINK REPORT</th>
+            <th rowspan="2">SLA</th>
             <th rowspan="2">PERFORMANCE</th>
           </tr>
           <tr>
@@ -162,6 +163,7 @@
                     <td><?php echo $data['tahun']; ?></td>
                     <td><?php echo $data['nama_bulan']; ?></td>
                     <td><?php echo $data['link_report']; ?></td>
+                    <td><?php echo $data['sla']."%"; ?></td>   
                     <td><?php echo $data['performance']."%"; ?></td>         
                   </tr>
 
@@ -255,6 +257,13 @@
                     <label class="label-control col-md-3">LINK REPORT</label>
                     <div class="col-md-8">
                       <textarea class="form-control" name="link" rows="3" placeholder="isikan link disini ..." required></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="label-control col-md-3">SLA</label>
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" placeholder="ex : 98.99" name="sla" required>
                     </div>
                   </div>
 
