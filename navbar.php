@@ -72,6 +72,21 @@ function isivendor($id){
   $no++;
 }}
 
+//-------------------------- Ambil Bulan ----------------------------
+function bulan_mulai($bm){
+  if ($bm == 1) {echo "Januari";} else if ($bm == 2) {echo "Februari";} else if ($bm == 3) {echo "Maret";}
+  else if ($bm == 4) {echo "April";} else if ($bm == 5) {echo "Mei";} else if ($bm == 6) {echo "Juni";}
+  else if ($bm == 7) {echo "Juli";} else if ($bm == 8) {echo "Agustus";} else if ($bm == 9) {echo "September";}
+  else if ($bm == 10) {echo "Oktober";} else if ($bm == 11) {echo "November";} else if ($bm == 12) {echo "Desember";}
+}
+
+function bulan_selesai($bs){
+  if ($bs == 1) {echo "Januari";} else if ($bs == 2) {echo "Februari";} else if ($bs == 3) {echo "Maret";}
+  else if ($bs == 4) {echo "April";} else if ($bs == 5) {echo "Mei";} else if ($bs == 6) {echo "Juni";}
+  else if ($bs == 7) {echo "Juli";} else if ($bs == 8) {echo "Agustus";} else if ($bs == 9) {echo "September";}
+  else if ($bs == 10) {echo "Oktober";} else if ($bs == 11) {echo "November";} else if ($bs == 12) {echo "Desember";}
+}
+
 ?>
 <ul class="nav navbar-nav">
 

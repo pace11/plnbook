@@ -23,10 +23,10 @@
 
   // ------------------------ Report Vendor ------------------------
   elseif ($tampil == "report_vendor") include("page/report_vendor/report_list.php");
-  elseif ($tampil == "report_tambahpro") include("page/report_vendor/report_tambahpro.php");
 
   // ------------------------ kontrak vendor ------------------------
   elseif ($tampil == "kontrak_vendor") include("page/kontrak_vendor/kontrak_list.php");
+  elseif ($tampil == "kontrak_tambahpro") include("page/kontrak_vendor/kontrak_tambahpro.php");
   // ------------------------ Pesan ------------------------
   elseif ($tampil == "pesan") include("page/pesan/pesan_list.php");
 

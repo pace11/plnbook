@@ -201,10 +201,16 @@
 
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+      format: "MM-yyyy",
+      startView: "months", 
+      minViewMode: "months"
     })
     $('#datepicker1').datepicker({
-      autoclose: true
+      autoclose: true,
+      format: "MM-yyyy",
+      startView: "months", 
+      minViewMode: "months"
     })
 
   })

@@ -109,17 +109,104 @@
     </div>
 
   <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="box box-warning"> <!-- box primary -->
+        <div class="box-header with-border">
+          <h3 class="box-title"><b>Kontrak</b> | List</h3>
+        </div>
+        <div class="box-body">
+          <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>NO</th>
+                <th>JENIS</th>
+                <th>NAMA KONTRAK</th>
+                <th>TAHUN</th>
+                <th>JANGKA KONTRAK</th>
+                <th>SLA</th>
+                <th>VENDOR</th>
+                <th>AKSI</th>
+              </tr>
+              </thead>
+              <tbody>
+
+                <?php
+
+                    $no = 1;
+                      $sql = mysqli_query($koneksi, "SELECT * FROM varian_kontrak
+                                          JOIN kontrak ON varian_kontrak.id_kontrak=kontrak.id_kontrak
+                                          JOIN master_vendor ON varian_kontrak.id_vendor=master_vendor.id_vendor
+                                          WHERE varian_kontrak.id_vendor='$id'
+                                          ORDER BY id_varkontrak")
+                      or die(mysqli_error($koneksi));
+
+                      while($data = mysqli_fetch_array($sql)){
+                    
+                ?>
+                  <tr>
+                    <td><?php echo $no; ?></td>
+                    <td><?php echo $data['type']; ?></td>
+                    <td><?php echo $data['type_varian']; ?></td>
+                    <td><?php echo $data['tahun']; ?></td>
+                    <td>
+                      <?php
+                      $bm = $data['bulan_mulai'];
+                      $bs = $data['bulan_selesai'];
+                      bulan_mulai($bm);echo " - ";bulan_selesai($bs) ;
+
+                      ?>
+                    </td>
+                    <td><?php echo $data['sla']; ?></td>
+                    <td><i class="fa fa-code-fork"></i> <?php echo $data['nama_perusahaan']; ?></td>
+                    <td>
+                      <a href="#" class='btn btn-primary btn-sm open_modal' id='<?php echo $data['id_varkontrak'] ?>'>
+                      <span class="fa fa-edit" aria-hidden="true"></span> Buat Report</a>
+                    </td>
+                  </tr>
+
+                  <?php
+                    $no++;
+                  }
+                  ?>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Popup untuk Edit-->
+    <div id="ModalSimpan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      </div>
+
+      <!-- Javascript untuk popup modal Edit-->
+      <script type="text/javascript">
+         $(document).ready(function () {
+         $(".open_modal").click(function(e) {
+            var m = $(this).attr("id");
+      		   $.ajax({
+          			   url: "page/report_vendor/report_tambah.php",
+          			   type: "GET",
+          			   data : {id_varkontrak: m,},
+          			   success: function (ajaxData){
+            			   $("#ModalSimpan").html(ajaxData);
+            			   $("#ModalSimpan").modal('show',{backdrop: 'true'});
+            		   }
+          		   });
+              });
+            });
+      </script>
+  </div>
+
+  <div class="row">
     
   <div class="col-xs-12">
     <div class="box box-success">
       <div class="box-header with-border">
         <h3 class="box-title"><b>Report Data</b> | <i class="fa fa-code-fork"></i> <?php echo $nama; ?></h3>
-        <div class="pull-right">
-          <a class="btn btn-success" href="#" data-target="#modal_tambah" data-toggle="modal">
-            <span class="fa fa-plus-circle"></span> Tambah Data
-          </a>
-
-        </div>
       </div>
 
       <div class="box-body">
@@ -128,10 +215,11 @@
           <thead>
           <tr>
             <th rowspan="2">NO</th>
-            <th rowspan="2">JENIS KONTRAK</th>
+            <th rowspan="2">JENIS</th>
             <th rowspan="2">NAMA KONTRAK</th>
             <th colspan="2">PERIODE</th>
             <th rowspan="2">LINK REPORT</th>
+            <th rowspan="2">SLA</th>
             <th rowspan="2">PERFORMANCE</th>
           </tr>
           <tr>
@@ -162,6 +250,7 @@
                     <td><?php echo $data['tahun']; ?></td>
                     <td><?php echo $data['nama_bulan']; ?></td>
                     <td><?php echo $data['link_report']; ?></td>
+                    <td><?php echo $data['sla']."%"; ?></td>
                     <td><?php echo $data['performance']."%"; ?></td>         
                   </tr>
 
@@ -325,17 +414,6 @@
     var areaChartData = {
       labels  : [<?php while($data=mysqli_fetch_array($bln)){echo "'".substr($data['nama_bulan'],0,3)."',";}?>],
       datasets: [
-        {
-          label               : 'Digital Goods',
-          fillColor           : '#dfdfdf',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [
-            <?php while($dataa=mysqli_fetch_array($nil)){echo $dataa['performance'].",";} ?>]
-        },
         //chart line kedua
         {
           label               : 'Electronics',
@@ -346,6 +424,17 @@
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(223,22,22)' ,
           data                : [ <?php while($dataaa=mysqli_fetch_array($nila)){echo $dataaa['sla'].",";} ?>]
+        },
+        {
+          label               : 'Digital Goods',
+          fillColor           : '#dfdfdf',
+          strokeColor         : 'rgba(60,141,188,0.8)',
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : [
+            <?php while($dataa=mysqli_fetch_array($nil)){echo $dataa['performance'].",";} ?>]
         }
       ]
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 function isivendors($id){
   include 'lib/koneksi.php';
   $no=1;
@@ -34,7 +34,7 @@ function isivendors($id){
         <div class="box-header with-border">
           <h3 class="box-title"><b>Kontrak</b> | List</h3>
           <div class="box-tools pull-right">
-            <a class="btn btn-warning" href="#" data-target="#modal_tambah" data-toggle="modal">
+            <a class="btn btn-warning btn-sm" href="#" data-target="#modal_tambah" data-toggle="modal">
               <span class="fa fa-plus-circle"></span> Tambah Data
             </a>
           </div>
@@ -47,6 +47,9 @@ function isivendors($id){
                 <th>NO</th>
                 <th>JENIS</th>
                 <th>NAMA KONTRAK</th>
+                <th>TAHUN</th>
+                <th>JANGKA KONTRAK</th>
+                <th>SLA</th>
                 <th>VENDOR</th>
                 <th>AKSI</th>
               </tr>
@@ -69,6 +72,16 @@ function isivendors($id){
                     <td><?php echo $no; ?></td>
                     <td><?php echo $data['type']; ?></td>
                     <td><?php echo $data['type_varian']; ?></td>
+                    <td><?php echo $data['tahun']; ?></td>
+                    <td>
+                      <?php
+                      $bm = $data['bulan_mulai'];
+                      $bs = $data['bulan_selesai'];
+                      bulan_mulai($bm);echo " - ";bulan_selesai($bs) ;
+
+                      ?>
+                    </td>
+                    <td><?php echo $data['sla']; ?></td>
                     <td><i class="fa fa-code-fork"></i> <?php echo $data['nama_perusahaan']; ?></td>
                     <td>
                       <a href="?tampil=kontrak_edit&id=<?php echo $data['id_varkontrak']; ?>" class="btn btn-primary btn-xs" title="edit">
@@ -90,6 +103,7 @@ function isivendors($id){
 
         </div>
       </div>
+      
     </div>
     
     <!-- Modal Tambah Data -->
@@ -105,13 +119,28 @@ function isivendors($id){
             </div>
 
             <div class="modal-body">
-            <form action="?tampil=karyawan_tambahpro" method="POST" name="modal_popup" enctype="multipart/form-data"
+            <form action="?tampil=kontrak_tambahpro" method="POST" name="modal_popup" enctype="multipart/form-data"
             class="form-horizontal">
               
                 <div class="form-group">
+                  <label class="label-control col-md-3">VENDOR</label>
+                  <div class="col-md-5">
+                    <select class="form-control" name="vendor">
+                      <option value="">-- pilih salah satu --</option>
+                      <?php
+                      $vend = mysqli_query($koneksi, "SELECT * FROM master_vendor ORDER BY id_vendor ASC");
+                      while ($rowvend = mysqli_fetch_array($vend)){
+                        echo "<option value=$rowvend[id_vendor]>$rowvend[nama_perusahaan]</option> \n";
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                  
+                <div class="form-group">
                   <label class="label-control col-md-3">JENIS</label>
                   <div class="col-md-4">
-                    <select class="form-control" name="bulan">
+                    <select class="form-control" name="jenis_kontrak">
                       <option value="">-- pilih salah satu --</option>
                       <?php
                       $kontrak = mysqli_query($koneksi, "SELECT * FROM kontrak ORDER BY id_kontrak ASC");
@@ -129,46 +158,28 @@ function isivendors($id){
                     <textarea class="form-control" name="nama_kontrak" rows="3" placeholder="ex: HC Online"></textarea>
                   </div>
                 </div>
+
                 <div class="form-group">
-                  <label class="label-control col-md-3">CONTACT</label>
-                  <div class="col-md-6">
+                  <label class="label-control col-md-3">JANGKA KONTRAK</label>
+                  <div class="col-md-8">
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                        <input type="text" name="bulan_mulai"class="form-control pull-right" id="datepicker">
+                      <span class="input-group-addon">sampai</span>
+                        <input type="text" name="bulan_selesai" class="form-control pull-right" id="datepicker1">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="label-control col-md-3">SLA</label>
+                  <div class="col-md-3">
                     <div class="input-group">
-                      <span class="input-group-addon">+628</span>
-                      <input type="text" class="form-control" name="contact" data-inputmask='"mask": "99-9999-9999"' data-mask required>
+                      <input type="text" class="form-control" name="sla" required>
+                      <span class="input-group-addon">%</span>
                     </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="label-control col-md-3">IMAGE</label>
-                    <div class="col-md-6">
-                      <input type="file" name="img" class="form-control">
-                    </div>
-                  <code>.Maks 1 MB</code>
-                </div>
-
-                <div class="form-group">
-                  <label class="label-control col-md-3"></label>
-                    <div class="col-md-9">
-                      <code>Silakan upload gambar dengan ekstensi .jpeg/.jpg/.png/.gif</code>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary">
-                  <div class="panel-heading"> <span class="glyphicon glyphicon-lock"></span> Data Akun</div>
-                </div>
-
-                <div class="form-group">
-                  <label class="label-control col-md-3">USERNAME</label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="username" maxlength="10" placeholder="ex : Garuda (max 10 karakter)" required/>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="label-control col-md-3">PASSWORD</label>
-                  <div class="col-md-6">
-                    <input type="password" class="form-control" name="passwd" maxlength="6" placeholder="ex : grdind (max 6 karakter)" required/>
                   </div>
                 </div>
 
