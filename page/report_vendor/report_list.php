@@ -250,7 +250,11 @@
                     <td><?php echo $data['tahun']; ?></td>
                     <td><?php echo $data['nama_bulan']; ?></td>
                     <td><?php echo $data['link_report']; ?></td>
+<<<<<<< HEAD
                     <td><?php echo $data['sla']."%"; ?></td>
+=======
+                    <td><?php echo $data['sla']."%"; ?></td>   
+>>>>>>> 6c00d997b69bf6acaf61ae1eb5819db8fd76398c
                     <td><?php echo $data['performance']."%"; ?></td>         
                   </tr>
 
@@ -344,6 +348,13 @@
                     <label class="label-control col-md-3">LINK REPORT</label>
                     <div class="col-md-8">
                       <textarea class="form-control" name="link" rows="3" placeholder="isikan link disini ..." required></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="label-control col-md-3">SLA</label>
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" placeholder="ex : 98.99" name="sla" required>
                     </div>
                   </div>
 
