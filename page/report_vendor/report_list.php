@@ -250,11 +250,8 @@
                     <td><?php echo $data['tahun']; ?></td>
                     <td><?php echo $data['nama_bulan']; ?></td>
                     <td><?php echo $data['link_report']; ?></td>
-<<<<<<< HEAD
                     <td><?php echo $data['sla']."%"; ?></td>
-=======
                     <td><?php echo $data['sla']."%"; ?></td>   
->>>>>>> 6c00d997b69bf6acaf61ae1eb5819db8fd76398c
                     <td><?php echo $data['performance']."%"; ?></td>         
                   </tr>
 
