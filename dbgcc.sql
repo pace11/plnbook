@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2018 at 10:07 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Generation Time: Apr 02, 2018 at 09:32 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -146,12 +146,12 @@ CREATE TABLE `pesan` (
 --
 
 INSERT INTO `pesan` (`id_pesan`, `subjek`, `isi`, `jawaban`, `nip`, `id_vendor`, `created_at`) VALUES
-(1, 'Gagal Upload', 'kenapa pada saat ngupload materi ada error ya, makasih', 'kayaknya mas salah ngupload gambarnya deh.. coba nanti dicek aja lagi ya.. ', 'GARUDA0001', NULL, '2018-02-28'),
+(1, 'Gagal Upload', 'kenapa pada saat ngupload materi ada error ya, makasih', '', 'GARUDA0001', NULL, '2018-02-28'),
 (2, 'Chart error', 'pak. kenapa pas upload chart, malah error dan nggak muncul. mohon bantuannya.. ', 'oke.. siap.. segera dicek ya mas... (y)', NULL, 'VENDOR0001', '2018-02-28'),
 (4, 'Email', 'Mas, saya belom dapat email masuk.. kenapa ya mas ??', 'sudah masuk mas.. coba dicek mas.. ', NULL, 'VENDOR0003', '2018-03-02'),
 (7, 'Gagal Download', 'mas, kenapa masih gagal download ya ??', 'coba dicek lagi mas.. sdh bisa kok. makasih..', 'GARUDA0001', NULL, '2018-03-02'),
 (9, 'Error Export', 'Mas, kenapa ketika saya export ke PDF, malah error ya muncul query error..', 'coba dicek mas.. sekarang sdh masuk itu.. makasih', 'GARUDA0002', NULL, '2018-03-03'),
-(10, 'Grafik', 'mas.. grafik saya nggak jalan.. ada error tah ??', NULL, NULL, 'VENDOR0001', '2018-03-09');
+(10, 'Grafik', 'mas.. grafik saya nggak jalan.. ada error tah ??', 'alkknglkse', NULL, 'VENDOR0001', '2018-03-09');
 
 -- --------------------------------------------------------
 
@@ -167,6 +167,7 @@ CREATE TABLE `report_vendor` (
   `tahun` varchar(5) NOT NULL,
   `id_bulan` int(5) NOT NULL,
   `link_report` text NOT NULL,
+  `sla` int(5) NOT NULL,
   `performance` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -174,13 +175,12 @@ CREATE TABLE `report_vendor` (
 -- Dumping data for table `report_vendor`
 --
 
-INSERT INTO `report_vendor` (`id_report`, `id_vendor`, `id_kontrak`, `id_varkontrak`, `tahun`, `id_bulan`, `link_report`, `performance`) VALUES
-(2, 'VENDOR0001', 2, 1, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '98.90'),
-(3, 'VENDOR0001', 2, 1, '2018', 2, 'http://localhost/rev_report/index.php?tampil=report_vendor', '90.00'),
-(6, 'VENDOR0001', 2, 1, '2018', 3, 'http://localhost/rev_report/index.php?tampil=report_vendor', '87.00'),
-(10, 'VENDOR0001', 2, 1, '2018', 4, 'http://localhost/rev_report/index.php?tampil=report_vendor', '40.78'),
-(11, 'VENDOR0001', 2, 1, '2018', 5, 'http://localhost/rev_report/index.php?tampil=report_vendor', '81.76'),
-(16, 'VENDOR0001', 1, 4, '2018', 1, 'http://localhost/rev_report/index.php?tampil=report_vendor', '76.90');
+INSERT INTO `report_vendor` (`id_report`, `id_vendor`, `id_kontrak`, `id_varkontrak`, `tahun`, `id_bulan`, `link_report`, `sla`, `performance`) VALUES
+(18, 'VENDOR0001', 1, 5, '2018', 1, 'http://localhost/garudaind/index.php?tampil=report_vendor#', 98, '78.00'),
+(19, 'VENDOR0001', 1, 5, '2018', 2, 'http://localhost/garudaind/index.php?tampil=report_vendor#', 98, '89.00'),
+(20, 'VENDOR0001', 1, 5, '2018', 3, 'http://localhost/garudaind/?tampil=report_vendor#', 98, '76.86'),
+(21, 'VENDOR0002', 2, 6, '2018', 1, 'http://localhost/garudaind/index.php?tampil=report_vendor#', 78, '76.00'),
+(22, 'VENDOR0002', 2, 6, '2018', 2, 'http://localhost/garudaind/index.php?tampil=report_vendor#', 78, '73.00');
 
 -- --------------------------------------------------------
 
@@ -212,6 +212,10 @@ CREATE TABLE `varian_kontrak` (
   `id_varkontrak` int(5) NOT NULL,
   `type_varian` varchar(30) NOT NULL,
   `id_kontrak` int(5) NOT NULL,
+  `tahun` varchar(5) NOT NULL,
+  `bulan_mulai` int(5) NOT NULL,
+  `bulan_selesai` int(5) NOT NULL,
+  `sla` int(5) NOT NULL,
   `id_vendor` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -219,9 +223,9 @@ CREATE TABLE `varian_kontrak` (
 -- Dumping data for table `varian_kontrak`
 --
 
-INSERT INTO `varian_kontrak` (`id_varkontrak`, `type_varian`, `id_kontrak`, `id_vendor`) VALUES
-(1, 'Wifi Gedung SO', 2, 'VENDOR0001'),
-(4, 'HC Online', 1, 'VENDOR0001');
+INSERT INTO `varian_kontrak` (`id_varkontrak`, `type_varian`, `id_kontrak`, `tahun`, `bulan_mulai`, `bulan_selesai`, `sla`, `id_vendor`) VALUES
+(5, 'HC Online', 1, '2018', 1, 3, 98, 'VENDOR0001'),
+(6, 'Wifi ID Unlimited', 2, '2018', 5, 11, 78, 'VENDOR0002');
 
 --
 -- Indexes for dumped tables
@@ -284,21 +288,25 @@ ALTER TABLE `varian_kontrak`
 --
 ALTER TABLE `bulan`
   MODIFY `id_bulan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
   MODIFY `id_pesan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `report_vendor`
 --
 ALTER TABLE `report_vendor`
-  MODIFY `id_report` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_report` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT for table `varian_kontrak`
 --
 ALTER TABLE `varian_kontrak`
-  MODIFY `id_varkontrak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
+  MODIFY `id_varkontrak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

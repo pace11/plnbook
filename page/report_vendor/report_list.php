@@ -68,6 +68,7 @@
             </div>
           </div>
           <div class="box-body">
+            <div class="table-responsive">
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>
@@ -103,6 +104,7 @@
               </tr>
               <?php } ?>
             </table>
+            </div>
           </div>
         </div>
       </div>
@@ -157,7 +159,7 @@
 
                       ?>
                     </td>
-                    <td><?php echo $data['sla']; ?></td>
+                    <td><?php echo $data['sla']."%"; ?></td>
                     <td><i class="fa fa-code-fork"></i> <?php echo $data['nama_perusahaan']; ?></td>
                     <td>
                       <a href="#" class='btn btn-primary btn-sm open_modal' id='<?php echo $data['id_varkontrak'] ?>'>
